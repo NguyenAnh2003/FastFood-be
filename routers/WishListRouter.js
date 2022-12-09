@@ -6,12 +6,18 @@ const wishListRouter = express.Router();
 
 wishListRouter.get(
   '/',
-  expressAsyncHandler(async (req, res) => {})
+  expressAsyncHandler(async (req, res) => {
+    try {
+      await WishList.findOne({})
+    } catch (error) {
+      console.log(error.message);
+    }
+  })
 );
 
 wishListRouter.post(
   '/create',
-  isAuth,
+  // isAuth,
   expressAsyncHandler(async (req, res) => {
     try {
       const newItem = new WishList({
@@ -23,6 +29,24 @@ wishListRouter.post(
       res
         .status(201)
         .send({ message: 'success', saveItem });
+    } catch (error) {
+      console.log(error.message);
+    }
+  })
+);
+
+wishListRouter.post(
+  '/remove',
+  // isAuth,
+  expressAsyncHandler(async (req, res) => {
+    try {
+      await WishList.deleteOne(
+        {
+          productId: req.body.productId,
+          user: req.body.user,
+        },
+        (err) => console.log(err)
+      );
     } catch (error) {
       console.log(error.message);
     }
