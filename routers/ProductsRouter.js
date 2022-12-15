@@ -2,7 +2,6 @@ import express from "express";
 import Product from "../models/ProductModel.js";
 import expressAsyncHandler from 'express-async-handler';
 
-
 const productRouter = express.Router();
 
 // send new product and sale

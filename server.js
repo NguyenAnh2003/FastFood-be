@@ -10,18 +10,23 @@ import newsRouter from './routers/NewsRouter.js';
 import userRouter from './routers/UserRouter.js';
 import orderRouter from './routers/OrdersRouter.js';
 import wishListRouter from './routers/WishListRouter.js';
+import cors from 'cors';
 
 // config dotenv file
 dotenv.config();
-mongoose.connect(process.env.MONGODB_URI).then(() => {
-  console.log('Connected');
-}).catch(err => console.log(err.message));
-
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log('Connected');
+  })
+  .catch((err) => console.log(err.message));
 
 const app = express();
 // middleware server and client
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
+// app.use(cors());
+// app.use(cors)
 
 // api
 app.use('/api/seed', seedRouter);
@@ -36,9 +41,11 @@ app.get('/api/keys/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
 
-app.use((err, req, res, next)=>{
-  res.status(500).send({message: err.message});
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message });
 });
 
 const port = process.env.PORT;
-app.listen(port, () => console.log(`Server running at port: ${port}`));
+app.listen(port, () =>
+  console.log(`Server running at port: ${port}`)
+);

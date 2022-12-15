@@ -5,23 +5,24 @@ import Product from '../models/ProductModel.js';
 
 const seedRouter = express.Router();
 
-seedRouter.get('/', async(req, res) => {
+seedRouter.get('/', async (req, res) => {
   await Product.deleteMany({});
-  const createdProducts = await Product.insertMany(data.products);
+  const createdProducts = await Product.insertMany(
+    data.products
+  );
 
   await News.deleteMany({});
   const createdNews = await News.insertMany(data.news);
 
   res.send({
     createdProducts,
-    createdNews
+    createdNews,
   });
 });
 
-
 seedRouter.get('/main', async (req, res) => {
   const products = await Product.find({
-    "new": true
+    new: true,
   });
 
   const news = await News.find();
@@ -29,7 +30,6 @@ seedRouter.get('/main', async (req, res) => {
     products,
     news,
   });
-
-})
+});
 
 export default seedRouter;
