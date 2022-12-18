@@ -4,8 +4,8 @@ import {
   getSinglePost,
 } from '../controllers/NewsController.js';
 
-
 const newsRouter = express.Router();
+
 newsRouter.get('/', getAllPosts);
 newsRouter.get('/:id', getSinglePost);
 
