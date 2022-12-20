@@ -1,4 +1,4 @@
-import User from '../models/UserModel';
+import User from '../models/UserModel.js';
 import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer';
 import { generateToken, isAuth } from '../utils.js';

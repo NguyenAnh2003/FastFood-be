@@ -1,4 +1,4 @@
-import Product from '../models/ProductModel';
+import Product from '../models/ProductModel.js';
 
 export const getProducts = async (req, res, next) => {
   const PAGE_SIZE = 6;
