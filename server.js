@@ -14,6 +14,7 @@ import cors from 'cors';
 
 // config dotenv file
 dotenv.config();
+mongoose.set('strictQuery', true); // ?
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {

@@ -1,4 +1,6 @@
 import News from '../models/NewsModel.js';
+// functional
+
 
 export const getAllPosts = async (req, res, next) => {
   const posts = await News.find();
