@@ -1,6 +1,5 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
-import { isAuth } from '../../utils.js';
 import WishList from '../models/WishListModel.js';
 const wishListRouter = express.Router();
 
@@ -8,7 +7,7 @@ wishListRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
     try {
-      await WishList.findOne({})
+      await WishList.findOne({});
     } catch (error) {
       console.log(error.message);
     }
@@ -17,7 +16,6 @@ wishListRouter.get(
 
 wishListRouter.post(
   '/create',
-  // isAuth,
   expressAsyncHandler(async (req, res) => {
     try {
       const newItem = new WishList({
@@ -37,7 +35,6 @@ wishListRouter.post(
 
 wishListRouter.post(
   '/remove',
-  // isAuth,
   expressAsyncHandler(async (req, res) => {
     try {
       await WishList.deleteOne(

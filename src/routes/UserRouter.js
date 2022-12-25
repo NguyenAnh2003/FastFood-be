@@ -1,5 +1,4 @@
 import exrpess from 'express';
-import { isAuth } from '../../utils.js';
 import {
   userContact,
   userLogin,

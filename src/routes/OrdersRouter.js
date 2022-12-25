@@ -1,12 +1,12 @@
 import express from 'express';
-import { isAuth } from '../../utils.js';
 import {
   createOrder,
   findOrder,
   payOrder,
 } from '../controllers/OrderController.js';
+import { authenticate } from '../middleware/Authentication.js';
 const orderRouter = express.Router();
-orderRouter.post('/', isAuth, createOrder);
-orderRouter.get('/:id', isAuth, findOrder);
-orderRouter.put('/:id/pay', isAuth, payOrder);
+orderRouter.post('/', authenticate, createOrder);
+orderRouter.get('/:id', authenticate, findOrder);
+orderRouter.put('/:id/pay', authenticate, payOrder);
 export default orderRouter;
