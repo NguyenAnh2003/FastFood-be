@@ -1,33 +1,22 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import seedRouter from './routers/SeedRouter.js';
-import productRouter from './routers/ProductsRouter.js';
-import data from './data/data.js';
-import combineRouter from './routers/CombineRouter.js';
-import newsRouter from './routers/NewsRouter.js';
-import userRouter from './routers/UserRouter.js';
-import orderRouter from './routers/OrdersRouter.js';
-import wishListRouter from './routers/WishListRouter.js';
-import cors from 'cors';
+import seedRouter from './src/routes/SeedRouter.js';
+import combineRouter from './src/routes/CombineRouter.js';
+import productRouter from './src/routes/ProductsRouter.js';
+import newsRouter from './src/routes/NewsRouter.js';
+import userRouter from './src/routes/UserRouter.js';
+import orderRouter from './src/routes/OrdersRouter.js';
+import wishListRouter from './src/routes/WishListRouter.js';
+import { connector } from './src/config/database.js';
 
 // config dotenv file
 dotenv.config();
-mongoose.set('strictQuery', true); // ?
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log('Connected');
-  })
-  .catch((err) => console.log(err.message));
+connector(); // run db
 
 const app = express();
 // middleware server and client
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(cors());
-// app.use(cors)
 
 // api
 app.use('/api/seed', seedRouter);

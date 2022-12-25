@@ -1,9 +1,9 @@
 import User from '../models/UserModel.js';
 import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer';
-import { generateToken, isAuth } from '../utils.js';
+import { createAccessToken } from './AuthenticationController.js';
 
-export const userLogin = async (req, res, next) => {
+export const userLogin = async (req, res) => {
   const user = await User.findOne({
     email: req.body.email,
   });
@@ -16,7 +16,7 @@ export const userLogin = async (req, res, next) => {
         name: user.name,
         email: user.email,
         address: user.address,
-        token: generateToken(user),
+        accesstoken: createAccessToken(user),
       });
       return;
     }
@@ -24,7 +24,7 @@ export const userLogin = async (req, res, next) => {
   res.status(401).send({ message: 'User not found' });
 };
 
-export const userSignup = async (req, res, next) => {
+export const userSignup = async (req, res) => {
   try {
     const newUser = new User({
       email: req.body.email,
@@ -38,14 +38,14 @@ export const userSignup = async (req, res, next) => {
       name: user.name,
       address: user.address,
       email: user.email,
-      token: generateToken(user),
+      accesstoken: createAccessToken(user),
     });
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const userContact = async (req, res, next) => {
+export const userContact = async (req, res) => {
   const testAcc = await nodemailer.createTestAccount();
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -68,7 +68,7 @@ export const userContact = async (req, res, next) => {
   });
 };
 
-export const userUpdate = async (req, res, next) => {
+export const userUpdate = async (req, res) => {
   const user = await User.findById(req.user._id);
   if (user) {
     user.name = req.body.name || user.name;
@@ -79,7 +79,7 @@ export const userUpdate = async (req, res, next) => {
       name: updatedUser.name,
       email: updatedUser.email,
       address: updatedUser.address,
-      token: generateToken(updatedUser),
+      accesstoken: createAccessToken(updatedUser),
     });
   } else {
     res.status(404).send({ message: 'User not found' });

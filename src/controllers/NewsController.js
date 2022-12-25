@@ -1,5 +1,6 @@
-import News from '../models/NewsModel.js';
 // functional
+
+import News from "../models/NewsModel.js";
 
 
 export const getAllPosts = async (req, res, next) => {
