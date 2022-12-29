@@ -1,5 +1,6 @@
 import WishList from '../models/wishlist.schema';
 
+// save in wishlist table with user id
 const saveFoodDB = async (item, productId, user) => {
   try {
     const newItem = new WishList({
@@ -14,4 +15,19 @@ const saveFoodDB = async (item, productId, user) => {
   }
 };
 
-export { saveFoodDB };
+// remove in wishlist table with user id
+const unSaveFoodDB = async (productId, user) => {
+  try {
+    const rs = await WishList.deleteOne(
+      {
+        productId: productId,
+        user: user,
+      },
+      (err) => console.log(err)
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export { saveFoodDB, unSaveFoodDB };

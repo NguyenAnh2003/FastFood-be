@@ -1,4 +1,7 @@
-import { saveFoodDB } from '../services/wishlist.service';
+import {
+  saveFoodDB,
+  unSaveFoodDB,
+} from '../services/wishlist.service';
 
 const saveFood = async (req, res, next) => {
   try {
@@ -12,4 +15,15 @@ const saveFood = async (req, res, next) => {
   }
 };
 
-export {}
+const unSaveFood = async (req, res, next) => {
+  try {
+    const productId = req.body.productId;
+    const user = req.body.user;
+    const res = await unSaveFoodDB(productId, user);
+    res.status(201).send({ message: 'Success unsave' });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { saveFood, unSaveFood };

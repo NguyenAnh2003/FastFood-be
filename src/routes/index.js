@@ -16,6 +16,7 @@ import {
   userSignup,
   userUpdate,
 } from '../controllers/index.js';
+import { saveFood, unSaveFood } from '../controllers/wishlist.controller.js';
 import { authenticate } from '../middleware/authentication.middleware.js';
 
 const routes = express.Router();
@@ -48,6 +49,7 @@ routes.get('/:id', authenticate, findOrder);
 routes.put('/:id/pay', authenticate, payOrder);
 
 // wishlist
-routes.post('/create', ) // authenticate
+routes.post('/create', saveFood) // authenticate require
+routes.post('/remove', unSaveFood) // authenticate require
 
 export default routes;
