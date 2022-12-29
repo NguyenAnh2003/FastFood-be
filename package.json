@@ -5,12 +5,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server",
-    "dev": "nodemon src/server.js --ignore __tests__",
-    "lint": "eslint \"**/*.js\" --ignore-pattern node_modules/ --ignore-pattern dist/",
-    "build": "sucrase ./src -d ./dist --transforms imports",
-    "debug": "node --inspect-brk -r sucrase/register server.js"
+    "dev": "nodemon src/server.js ",
+    "build": ""
   },
   "author": "NguyenAnh2003 <cunho2803032003@gmail.com>",
   "license": "MIT",

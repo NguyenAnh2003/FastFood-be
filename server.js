@@ -1,13 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import seedRouter from './src/routes/SeedRouter.js';
-import combineRouter from './src/routes/CombineRouter.js';
-import productRouter from './src/routes/ProductsRouter.js';
-import newsRouter from './src/routes/NewsRouter.js';
-import userRouter from './src/routes/UserRouter.js';
-import orderRouter from './src/routes/OrdersRouter.js';
-import wishListRouter from './src/routes/WishListRouter.js';
-import { connector } from './src/config/database.js';
+import { connector } from './src/config/database.config.js';
+import cors from 'cors';
+import routes from './src/routes/index.js';
 
 // config dotenv file
 dotenv.config();
@@ -17,15 +12,10 @@ const app = express();
 // middleware server and client
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // api
-app.use('/api/seed', seedRouter);
-app.use('/api/combine', combineRouter);
-app.use('/api/products', productRouter);
-app.use('/api/posts', newsRouter);
-app.use('/api/user', userRouter);
-app.use('/api/orders', orderRouter);
-app.use('/api/wishlist', wishListRouter);
+app.use('/api', routes);
 
 // paypal ?
 app.get('/api/keys/paypal', (req, res) => {

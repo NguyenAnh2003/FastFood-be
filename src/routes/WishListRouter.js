@@ -1,6 +1,7 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import WishList from '../models/WishListModel.js';
+import { saveFoodDB } from '../services/wishlist.service.js';
 const wishListRouter = express.Router();
 
 wishListRouter.get(
@@ -17,16 +18,14 @@ wishListRouter.get(
 wishListRouter.post(
   '/create',
   expressAsyncHandler(async (req, res) => {
+    const item = req.body.item;
+    const productId = req.body.item._id;
+    const user = req.body.user
     try {
-      const newItem = new WishList({
-        item: req.body.item,
-        productId: req.body.item._id,
-        user: req.body.user,
-      });
-      const saveItem = await newItem.save();
+      const rs = await saveFoodDB()
       res
         .status(201)
-        .send({ message: 'success', saveItem });
+        .send({ message: 'success', rs });
     } catch (error) {
       console.log(error.message);
     }
