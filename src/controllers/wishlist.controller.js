@@ -1,7 +1,7 @@
 import {
   saveFoodDB,
   unSaveFoodDB,
-} from '../services/wishlist.service';
+} from '../services/wishlist.service.js';
 
 const saveFood = async (req, res, next) => {
   try {

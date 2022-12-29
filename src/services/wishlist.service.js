@@ -1,4 +1,4 @@
-import WishList from '../models/wishlist.schema';
+import WishList from '../models/wishlist.schema.js';
 
 // save in wishlist table with user id
 const saveFoodDB = async (item, productId, user) => {
