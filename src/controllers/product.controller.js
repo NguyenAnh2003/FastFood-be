@@ -12,8 +12,9 @@ export const getProducts = async (req, res) => {
 };
 
 export const getSpecialFood = async (req, res) => {
+  const {id} = req.params;
   try {
-    const rs = await getSpecialFoodDB();
+    const rs = await getSpecialFoodDB(id);
     res.send(rs);
   } catch (error) {
     console.log(error);

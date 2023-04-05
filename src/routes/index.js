@@ -16,7 +16,10 @@ import {
   userSignup,
   userUpdate,
 } from '../controllers/index.js';
-import { saveFood, unSaveFood } from '../controllers/wishlist.controller.js';
+import {
+  saveFood,
+  unSaveFood,
+} from '../controllers/wishlist.controller.js';
 import { authenticate } from '../middleware/authentication.middleware.js';
 
 const routes = express.Router();
@@ -30,8 +33,8 @@ routes.get('/seed', createData);
 // user
 routes.post('/user/signin', userLogin);
 routes.post('/user/signup', userSignup);
-routes.post('/user/contact', userContact);
 routes.post('/user/profile', authenticate, userUpdate);
+routes.post('/user/contact', userContact);
 
 // product
 routes.get('/products/', getProducts);
@@ -49,7 +52,7 @@ routes.get('/:id', authenticate, findOrder);
 routes.put('/:id/pay', authenticate, payOrder);
 
 // wishlist
-routes.post('/create', saveFood) // authenticate require
-routes.post('/remove', unSaveFood) // authenticate require
+routes.post('/create', saveFood); // authenticate require
+routes.post('/remove', unSaveFood); // authenticate require
 
 export default routes;

@@ -83,8 +83,8 @@ const userUpdateDB = async (_id, email, name) => {
   try {
     const user = await User.findById(_id);
     if (user) {
-      user.name = req.body.name || user.name;
-      user.email = req.body.email || user.email;
+      user.name = name || user.name;
+      user.email = email || user.email;
       const updatedUser = await user.save();
       return {
         _id: updatedUser._id,

@@ -45,9 +45,9 @@ const getCatgoriesDB = async () => {
   }
 };
 
-const getSingleProductDB = async () => {
+const getSingleProductDB = async (id) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(id);
     return product ? product : 'Not found';
   } catch (error) {
     console.log(error);

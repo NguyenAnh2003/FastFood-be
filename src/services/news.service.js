@@ -9,9 +9,9 @@ const getAllPostsDB = async () => {
   }
 };
 
-const getSinglePostDB = async () => {
+const getSinglePostDB = async (id) => {
   try {
-    const post = await News.findById(req.params.id);
+    const post = await News.findById(id);
     return post ? post : null;
   } catch (error) {
     console.error(error);

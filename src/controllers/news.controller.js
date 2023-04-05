@@ -15,8 +15,9 @@ const getAllPost = async (req, res, next) => {
 };
 
 const getSinglePost = async (req, res, next) => {
+  const id = req.params.id;
   try {
-    const result = await getSinglePostDB();
+    const result = await getSinglePostDB(id);
     res.send(result);
   } catch (error) {
     console.error(error);
