@@ -21,7 +21,7 @@ const userLoginDB = async (email, password) => {
         // return;
       }
     }
-    return 'User not found';
+    return user;
   } catch (err) {
     console.log(err);
   }

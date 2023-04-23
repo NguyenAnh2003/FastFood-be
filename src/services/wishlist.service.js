@@ -18,6 +18,15 @@ const createUserWithList = async (user) => {
   }
 };
 
+const getWishlistService = async (userId) => {
+  try {
+    const rs = await WishList.findOne({ user: userId });
+    return rs;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 // save in wishlist table with user id
 const saveFoodDB = async (product, user) => {
   try {
@@ -54,4 +63,9 @@ const unSaveFoodDB = async (product, user) => {
   }
 };
 
-export { saveFoodDB, unSaveFoodDB, createUserWithList };
+export {
+  saveFoodDB,
+  unSaveFoodDB,
+  createUserWithList,
+  getWishlistService,
+};

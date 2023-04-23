@@ -17,6 +17,7 @@ import {
   userUpdate,
 } from '../controllers/index.js';
 import {
+  getWishlist,
   saveFood,
   unSaveFood,
 } from '../controllers/wishlist.controller.js';
@@ -48,14 +49,14 @@ routes.get('/posts/:id', getSinglePost);
 
 // order
 routes.post('/orders', authenticate, createOrder);
-routes.get('/:id', authenticate, findOrder);
-routes.put('/:id/pay', authenticate, payOrder);
+routes.get('/orders/:id', authenticate, findOrder);
+routes.put('/orders/:id/pay', authenticate, payOrder);
 
 // wishlist
-routes.post('/wishlist/save', saveFood); // authenticate require
-routes.post('/wishlist/unsave', unSaveFood); // authenticate require
+routes.get('/wishlist', getWishlist);
+routes.post('/wishlist/save', saveFood);
+routes.post('/wishlist/unsave', unSaveFood);
 
 // paypal
-
 
 export default routes;

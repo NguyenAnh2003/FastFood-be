@@ -10,8 +10,11 @@ export const authenticate = (req, res, next) => {
   const authorization = req.headers['authorization'];
   const token =
     authorization && authorization.split(' ')[1];
-  if (!token)
-    return res.status(401).send({ message: 'No token' });
+  if (!token) {
+    return res
+      .status(401)
+      .send({ message: 'No token bitch' });
+  }
   jwt.verify(
     token,
     process.env.JWT_SECRET,
