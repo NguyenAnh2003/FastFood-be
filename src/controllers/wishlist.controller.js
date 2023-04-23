@@ -5,7 +5,7 @@ import {
 } from '../services/wishlist.service.js';
 
 const getWishlist = async (req, res, next) => {
-  const { userId } = req.body;
+  const { userId } = req.params;
   console.log(userId);
   try {
     const rs = await getWishlistService(userId);

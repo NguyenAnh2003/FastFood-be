@@ -1,3 +1,4 @@
+import User from '../models/user.schema.js';
 import WishList from '../models/wishlist.schema.js';
 
 const createUserWithList = async (user) => {
@@ -38,6 +39,8 @@ const saveFoodDB = async (product, user) => {
         },
       }
     );
+
+    // const urs = await User.findOneAndUpdate({}) 
     if (rs) console.log('Success saved');
     return rs;
   } catch (error) {

@@ -53,9 +53,9 @@ routes.get('/orders/:id', authenticate, findOrder);
 routes.put('/orders/:id/pay', authenticate, payOrder);
 
 // wishlist
-routes.get('/wishlist', getWishlist);
 routes.post('/wishlist/save', saveFood);
 routes.post('/wishlist/unsave', unSaveFood);
+routes.get('/wishlist/:userId', getWishlist);
 
 // paypal
 
