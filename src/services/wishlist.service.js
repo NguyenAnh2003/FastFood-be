@@ -35,12 +35,18 @@ const saveFoodDB = async (product, user) => {
       { user: user },
       {
         $addToSet: {
-          products: product,
+          products: {
+            name: product.name,
+            image: product.image,
+            description: product.description,
+            price: product.price,
+            productId: product._id,
+          },
         },
       }
     );
 
-    // const urs = await User.findOneAndUpdate({}) 
+    // const urs = await User.findOneAndUpdate({})
     if (rs) console.log('Success saved');
     return rs;
   } catch (error) {
