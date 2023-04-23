@@ -4,7 +4,7 @@ const createUserWithList = async (user) => {
   try {
     const wishlist = new WishList({
       user: user,
-      products: []
+      products: [],
     });
     const rs = await wishlist.save();
     if (rs) {
@@ -22,12 +22,17 @@ const createUserWithList = async (user) => {
 const saveFoodDB = async (product, user) => {
   try {
     const rs = await WishList.findOneAndUpdate(
-      { user },
-      { $addToSet: product }
+      { user: user },
+      {
+        $addToSet: {
+          products: product,
+        },
+      }
     );
     if (rs) console.log('Success saved');
+    return rs;
   } catch (error) {
-    console.log(error.message);
+    console.log('from save service', error.message);
   }
 };
 
@@ -35,10 +40,15 @@ const saveFoodDB = async (product, user) => {
 const unSaveFoodDB = async (product, user) => {
   try {
     const rs = await WishList.findOneAndUpdate(
-      { user },
-      { $pull: product }
+      { user: user },
+      {
+        $pull: {
+          products: product._id,
+        },
+      }
     );
     if (rs) console.log('Unsaved');
+    return rs;
   } catch (error) {
     console.log(error.message);
   }

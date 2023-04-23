@@ -27,8 +27,9 @@ export const getCatgories = async (req, res) => {
 };
 
 export const getSingleProduct = async (req, res) => {
+  const productId = req.params.id
   try {
-    const rs = await getSingleProductDB();
+    const rs = await getSingleProductDB(productId);
     res.send(rs);
   } catch (error) {
     console.log(error);
