@@ -52,8 +52,8 @@ routes.get('/:id', authenticate, findOrder);
 routes.put('/:id/pay', authenticate, payOrder);
 
 // wishlist
-routes.post('/create', saveFood); // authenticate require
-routes.post('/remove', unSaveFood); // authenticate require
+routes.post('/wishlist/save', saveFood); // authenticate require
+routes.post('/wishlist/unsave', unSaveFood); // authenticate require
 
 // paypal
 

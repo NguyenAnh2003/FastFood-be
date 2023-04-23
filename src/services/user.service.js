@@ -2,6 +2,7 @@ import User from '../models/user.schema.js';
 import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer';
 import { createAccessToken } from '../controllers/index.js';
+import { createUserWithList } from './wishlist.service.js';
 
 const userLoginDB = async (email, password) => {
   try {
@@ -40,6 +41,9 @@ const userSignupDB = async (
       address: address,
     });
     const user = await newUser.save();
+    if (user) {
+      await createUserWithList(user);
+    }
     return {
       _id: user._id,
       name: user.name,

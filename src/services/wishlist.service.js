@@ -1,33 +1,47 @@
 import WishList from '../models/wishlist.schema.js';
 
-// save in wishlist table with user id
-const saveFoodDB = async (item, productId, user) => {
+const createUserWithList = async (user) => {
   try {
-    const newItem = new WishList({
-      item: item,
-      productId: productId,
+    const wishlist = new WishList({
       user: user,
+      products: []
     });
-    const saveItem = await newItem.save();
-    res.status(201).send({ message: 'success', saveItem });
+    const rs = await wishlist.save();
+    if (rs) {
+      console.log('Success create save');
+    } else {
+      console.log('failed');
+    }
+    return rs;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+// save in wishlist table with user id
+const saveFoodDB = async (product, user) => {
+  try {
+    const rs = await WishList.findOneAndUpdate(
+      { user },
+      { $addToSet: product }
+    );
+    if (rs) console.log('Success saved');
   } catch (error) {
     console.log(error.message);
   }
 };
 
 // remove in wishlist table with user id
-const unSaveFoodDB = async (productId, user) => {
+const unSaveFoodDB = async (product, user) => {
   try {
-    const rs = await WishList.deleteOne(
-      {
-        productId: productId,
-        user: user,
-      },
-      (err) => console.log(err)
+    const rs = await WishList.findOneAndUpdate(
+      { user },
+      { $pull: product }
     );
+    if (rs) console.log('Unsaved');
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export { saveFoodDB, unSaveFoodDB };
+export { saveFoodDB, unSaveFoodDB, createUserWithList };

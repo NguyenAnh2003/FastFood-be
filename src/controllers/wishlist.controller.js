@@ -5,11 +5,10 @@ import {
 
 const saveFood = async (req, res, next) => {
   try {
-    const item = req.body.item;
-    const productId = req.body.item._id;
-    const user = req.body.user;
-    const rs = await saveFoodDB(item, productId, user);
-    res.status(201).send({ message: 'success', rs });
+    const productId = req.body.productId;
+    const user = req.body._id;
+    const rs = await saveFoodDB(productId, user);
+    res.status(201).send({ message: 'success save', rs });
   } catch (error) {
     console.log(error.message);
   }
@@ -18,7 +17,7 @@ const saveFood = async (req, res, next) => {
 const unSaveFood = async (req, res, next) => {
   try {
     const productId = req.body.productId;
-    const user = req.body.user;
+    const user = req.body._id;
     const res = await unSaveFoodDB(productId, user);
     res.status(201).send({ message: 'Success unsave' });
   } catch (error) {

@@ -1,17 +1,21 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, unique: true },
-    description: { type: String, required: true, unique: true },
+    description: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     slug: { type: String, required: true, unique: true },
     image: { type: String, required: true },
-    price: { 
+    price: {
       type: Number,
-      get: v => (v/100).toFixed(3),
-      set: v => v*100, 
-      required: true 
+      get: (v) => (v / 100).toFixed(3),
+      set: (v) => v * 100,
+      required: true,
     },
     countInStock: { type: Number, required: true },
     category: { type: String, required: true },
@@ -19,9 +23,9 @@ const productSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    toJSON: {getters: true}
-  },
+    toJSON: { getters: true },
+  }
 );
 
-const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.model('Product', productSchema);
 export default Product;
