@@ -11,7 +11,12 @@ const wishListSchema = new mongoose.Schema(
       {
         // name image description price _id
         name: { type: String, required: true },
-        price: { type: Number, required: true },
+        price: {
+          type: Number,
+          get: (v) => (v / 100).toFixed(3),
+          set: (v) => v * 1000,
+          required: true,
+        },
         image: { type: String, required: true },
         description: { type: String, required: true },
         productId: {

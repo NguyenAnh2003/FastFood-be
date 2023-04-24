@@ -36,10 +36,7 @@ const saveFoodDB = async (product, user) => {
       {
         $addToSet: {
           products: {
-            name: product.name,
-            image: product.image,
-            description: product.description,
-            price: product.price,
+            ...product,
             productId: product._id,
           },
         },
