@@ -43,7 +43,6 @@ const saveFoodDB = async (product, user) => {
       }
     );
 
-    // const urs = await User.findOneAndUpdate({})
     if (rs) console.log('Success saved');
     return rs;
   } catch (error) {
@@ -58,7 +57,7 @@ const unSaveFoodDB = async (product, user) => {
       { user: user },
       {
         $pull: {
-          products: product._id,
+          products: { productId: product._id },
         },
       }
     );
