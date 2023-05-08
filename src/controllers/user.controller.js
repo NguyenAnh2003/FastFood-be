@@ -33,19 +33,20 @@ const userSignup = async (req, res) => {
 const userContact = async (req, res) => {
   const { email, name } = req.body;
   try {
+    console.log({ email, name });
     const rs = await userContactDB(email, name);
-    res.send(rs);
+    res.status(201).send(rs);
   } catch (error) {
     console.log(error);
   }
 };
 
 const userUpdate = async (req, res) => {
-  const { _id } = req.user;
-  const { email, name } = req.body;
+  const { email, name, address } = req.body;
+  console.log({ email, name, address });
   try {
-    const rs = await userUpdateDB(_id, email, name);
-    res.send(rs);
+    // const rs = await userUpdateDB(_id, email, name);
+    res.status(201).send({ message: 'Success update' });
   } catch (error) {
     console.log(error);
   }

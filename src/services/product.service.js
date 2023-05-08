@@ -5,7 +5,9 @@ const getProductsDB = async (page, category) => {
   const pageQuery = parseInt(page || '0');
   const categoryQuery = category;
   const categoryFilter =
-    categoryQuery && categoryQuery !== 'all' ? { categoryQuery } : {};
+    categoryQuery && categoryQuery !== 'all'
+      ? { categoryQuery }
+      : {};
 
   try {
     const totalPages = await Product.countDocuments({
@@ -47,8 +49,15 @@ const getCatgoriesDB = async () => {
 
 const getSingleProductDB = async (id) => {
   try {
+    console.log('id product from service', id);
     const product = await Product.findById(id);
-    return product ? product : 'Not found';
+    if (product) {
+      console.log('found from service');
+      return product;
+    } else {
+      console.log('not found from service');
+      return null;
+    }
   } catch (error) {
     console.log(error);
   }

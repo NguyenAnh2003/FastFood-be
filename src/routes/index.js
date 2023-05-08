@@ -26,7 +26,7 @@ import { authenticate } from '../middleware/authentication.middleware.js';
 const routes = express.Router();
 
 // temp
-routes.get('/combine/home', loadData);
+routes.get('/welcome', loadData);
 
 // seed
 routes.get('/seed', createData);
@@ -34,7 +34,7 @@ routes.get('/seed', createData);
 // user
 routes.post('/user/signin', userLogin);
 routes.post('/user/signup', userSignup);
-routes.post('/user/profile', authenticate, userUpdate);
+routes.put('/user/update', authenticate, userUpdate);
 routes.post('/user/contact', userContact);
 
 // product

@@ -66,8 +66,8 @@ const userContactDB = async (email, name) => {
         pass: process.env.EMAIL_PASS,
       },
     });
-    const email = email;
-    const name = name;
+    // const email = email;
+    // const name = name;
     const option = {
       from: 'temp2803032003@gmail.com',
       to: email,

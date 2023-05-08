@@ -12,7 +12,7 @@ export const getProducts = async (req, res) => {
 };
 
 export const getSpecialFood = async (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   try {
     const rs = await getSpecialFoodDB(id);
     res.send(rs);
@@ -27,10 +27,14 @@ export const getCatgories = async (req, res) => {
 };
 
 export const getSingleProduct = async (req, res) => {
-  const productId = req.params.id
+  const { id } = req.params;
   try {
-    const rs = await getSingleProductDB(productId);
-    res.send(rs);
+    const rs = await getSingleProductDB(id);
+    if (rs) {
+      res.status(201).send({ message: 'FOUND', rs });
+    } else {
+      console.log('NOT FOUND');
+    }
   } catch (error) {
     console.log(error);
   }
